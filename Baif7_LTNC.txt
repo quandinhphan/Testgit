@@ -1,0 +1,118 @@
+Ph?n A
+7.1
+-Loi con tro chua khoi tao
+-Loi truy cap con tro NULL
+-Loi truy dangling references:truy cap toi vùng nho không còn hop le;
+
+7.2
+void f(int *mang){
+    cout << sizeof(mang);
+}
+int main(int argc, const char *argv[]){
+    int a[10];
+    cout << sizeof(a) << " ";
+    f(a);
+}
+kich thuoc cua mang a trong ham main la 40 con trong ham f la 4
+
+7.3
+
+int count_even(int *p, int n){
+    int dem=0;
+    for(int i=0;i<n;i++){
+        if(*(p+i)%2==0){
+            dem++;
+        }
+    }
+    return dem;
+}
+int main(int argc, const char *argv[]){
+    int a[10]={1,2,3,4,5,6,7,8,9,10};
+    int b[5],c[5];
+    for(int i=0;i<5;i++){
+        b[i]=a[i];
+    }
+    for(int j=0;j<5;j++){
+        c[j]=a[10-j];
+    }
+    cout << count_even(b,5) << endl;
+    cout << count_even(c,5) << endl;
+}
+
+7.4
+bool binarysearch(int *p, int low, int high, int key){
+    while(low<high){
+        int mid=(low+high)/2;
+        if(*(p+mid)<key){
+            low=mid+1;
+        }
+        if(*(p+mid)>key){
+            high=mid+1;
+        }
+        if(*(p+mid)==key){
+            return true;
+        }
+    }
+    return false;
+}
+int main(int argc, const char *argv[]){
+    int a[10]={0,1,2,3,4,5,6,7,8,9};
+    int n=sizeof(a)/sizeof(a[0]);
+    int x;
+    cin >> x;
+    string ketqua=(binarysearch(a,0,n-1,x)==true)?"found":"notfound";
+    cout << ketqua;
+}
+
+7.5
+loi canh bao la dia chi cua bien cuc bo "c" da duoc tra ve
+
+7.6
+cau lenh 1:
+in ra 
+Number of command-line arguments: 1
+Argument #0: _a_
+
+cau lenh 2:
+in ra
+Number of command-line arguments: 4
+Argument #0: _a_
+Argument #1: _first_
+Argument #2: _second_
+Argument #3: _3rd_
+
+cau lenh 3:
+in ra
+Number of command-line arguments: 2
+Argument #0: _a_
+Argument #1: _1_
+
+7.7
+int main(int argc, const char *argv[]){
+    int dodai1=strlen(argv[1]);
+    int dodai2=strlen(argv[2]);
+    char c[dodai1];
+    int k=0,dem=0;
+    while(k<dodai2){
+        for(int i=0;i<dodai1;i++){
+            c[i]=(argv[2])[i+k];
+        }
+        if(strcmp(argv[1],c)==0){
+            dem++;
+        }
+        k++;
+    }
+    cout << dem;
+}
+
+Phan B
+1
+output:
+B 0x5678
+A 0x1234
+B 0x1234
+
+2
+dap an D
+3
+con tro kieu double khong the tro den bien kieu char ma ta phai dung con tro kieu char
